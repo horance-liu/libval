@@ -17,52 +17,130 @@ FIXTURE(ValueTest) {
     ASSERT_TRUE(!i.empty());
   }
 
-  TEST("char") {
+  TEST("char -> char") {
     Value a((char) 2);
     ASSERT_TRUE(value_castable<char>(a));
     ASSERT_EQ(2, value_cast<char>(a));
   }
 
-  TEST("short") {
-    Value a((short) 2);
-    ASSERT_TRUE(value_castable<short>(a));
-    ASSERT_EQ(2, value_cast<short>(a));
+  TEST("schar -> schar") {
+    Value a((signed char) 2);
+    ASSERT_TRUE(value_castable<signed char>(a));
+    ASSERT_EQ(2, value_cast<signed char>(a));
   }
 
-  TEST("int") {
-    Value a(2);
-    ASSERT_TRUE(value_castable<int>(a));
-    ASSERT_EQ(2, value_cast<int>(a));
-  }
-
-  TEST("long") {
-    Value a((long) 2);
-    ASSERT_TRUE(value_castable<long>(a));
-    ASSERT_EQ(2, value_cast<long>(a));
-  }
-
-  TEST("uchar") {
+  TEST("uchar -> uchar") {
     Value a((unsigned char) 2);
     ASSERT_TRUE(value_castable<unsigned char>(a));
     ASSERT_EQ(2, value_cast<unsigned char>(a));
   }
 
-  TEST("ushort") {
+  TEST("short -> short") {
+    Value a((short) 2);
+    ASSERT_TRUE(value_castable<short>(a));
+    ASSERT_EQ(2, value_cast<short>(a));
+  }
+
+  TEST("int -> int") {
+    Value a(2);
+    ASSERT_TRUE(value_castable<int>(a));
+    ASSERT_EQ(2, value_cast<int>(a));
+  }
+
+  TEST("long -> long") {
+    Value a((long) 2);
+    ASSERT_TRUE(value_castable<long>(a));
+    ASSERT_EQ(2, value_cast<long>(a));
+  }
+
+  TEST("long literal -> long") {
+    Value a(2L);
+    ASSERT_TRUE(value_castable<long>(a));
+    ASSERT_EQ(2, value_cast<long>(a));
+  }
+
+  TEST("uchar -> uchar") {
+    Value a((unsigned char) 2);
+    ASSERT_TRUE(value_castable<unsigned char>(a));
+    ASSERT_EQ(2, value_cast<unsigned char>(a));
+  }
+
+  TEST("ushort -> ushort") {
     Value a((unsigned short) 2);
     ASSERT_TRUE(value_castable<unsigned short>(a));
     ASSERT_EQ(2, value_cast<unsigned short>(a));
   }
 
-  TEST("uint") {
+  TEST("uint -> uint") {
     Value a((unsigned int) 2);
     ASSERT_TRUE(value_castable<unsigned int>(a));
     ASSERT_EQ(2, value_cast<unsigned int>(a));
   }
 
-  TEST("ulong") {
+  TEST("uint -> int") {
+    Value a((unsigned int) 2);
+    ASSERT_TRUE(value_castable<int>(a));
+    ASSERT_EQ(2, value_cast<int>(a));
+  }
+
+  TEST("uint -> short") {
+    Value a((unsigned int) 2);
+    ASSERT_TRUE(value_castable<short>(a));
+    ASSERT_EQ(2, value_cast<short>(a));
+  }
+
+  TEST("uint -> char") {
+    Value a((unsigned int) 2);
+    ASSERT_TRUE(value_castable<char>(a));
+    ASSERT_EQ(2, value_cast<char>(a));
+  }
+
+  TEST("uint -> signed char") {
+    Value a((unsigned int) 2);
+    ASSERT_TRUE(value_castable<signed char>(a));
+    ASSERT_EQ(2, value_cast<signed char>(a));
+  }
+
+  TEST("ulong -> ulong") {
     Value a((unsigned long) 2);
     ASSERT_TRUE(value_castable<unsigned long>(a));
     ASSERT_EQ(2, value_cast<unsigned long>(a));
+  }
+
+  TEST("ulong literal -> ulong") {
+    Value a(2UL);
+    ASSERT_TRUE(value_castable<unsigned long>(a));
+    ASSERT_EQ(2, value_cast<unsigned long>(a));
+  }
+
+  TEST("ulong -> long") {
+    Value a((unsigned long) 2);
+    ASSERT_TRUE(value_castable<long>(a));
+    ASSERT_EQ(2, value_cast<long>(a));
+  }
+
+  TEST("ulong -> int") {
+    Value a((unsigned long) 2);
+    ASSERT_TRUE(value_castable<int>(a));
+    ASSERT_EQ(2, value_cast<int>(a));
+  }
+
+  TEST("ulong -> short") {
+    Value a((unsigned long) 2);
+    ASSERT_TRUE(value_castable<short>(a));
+    ASSERT_EQ(2, value_cast<short>(a));
+  }
+
+  TEST("ulong -> char") {
+    Value a((unsigned long) 2);
+    ASSERT_TRUE(value_castable<char>(a));
+    ASSERT_EQ(2, value_cast<char>(a));
+  }
+
+  TEST("ulong -> signed char") {
+    Value a((unsigned long) 2);
+    //ASSERT_TRUE(value_castable<signed char>(a));
+    ASSERT_EQ(2, value_cast<signed char>(a));
   }
 
   TEST("uchar -> ushort") {
@@ -87,14 +165,14 @@ FIXTURE(ValueTest) {
   }
 
   TEST("int(max_ushort) -> ushort") {
-    Value a(65535);
+    Value a(std::numeric_limits<unsigned short>::max());
 
     ASSERT_TRUE(value_castable<unsigned short>(a));
-    ASSERT_EQ(65535, value_cast<unsigned short>(a));
+    ASSERT_EQ(std::numeric_limits<unsigned short>::max(), value_cast<unsigned short>(a));
   }
 
   TEST("int(max_ushort + 1) -> ushort: overflow") {
-    Value a(65536);
+    Value a(std::numeric_limits<unsigned short>::max() + 1);
 
     ASSERT_TRUE(!value_castable<unsigned short>(a));
   }
@@ -102,7 +180,7 @@ FIXTURE(ValueTest) {
   TEST("ushort -> uint") {
     Value a((unsigned short) 15);
 
-    //ASSERT_TRUE(value_castable<unsigned int>(a));
+    ASSERT_TRUE(value_castable<unsigned int>(a));
     ASSERT_EQ(15, value_cast<unsigned int>(a));
   }
 
@@ -155,12 +233,12 @@ FIXTURE(ValueTest) {
     ASSERT_EQ(2, value_cast<unsigned long>(a));
   }
 
-  // TEST("signed char -> ulong") {
-  //   Value a((signed char) 2);
+   TEST("signed char -> ulong") {
+     Value a((signed char) 2);
 
-  //   ASSERT_TRUE(value_castable<unsigned long>(a));
-  //   ASSERT_EQ(2, value_cast<unsigned long>(a));
-  // }
+     ASSERT_TRUE(value_castable<unsigned long>(a));
+     ASSERT_EQ(2, value_cast<unsigned long>(a));
+   }
 
   TEST("unsigned char -> ulong") {
     Value a((unsigned char) 2);
@@ -176,16 +254,12 @@ FIXTURE(ValueTest) {
     ASSERT_EQ(2, value_cast<long>(a));
   }
 
-  // TEST("signed char -> long") {
-  //   ASSERT_TRUE(typeid(unsigned char) == typeid(char));
-  //   ASSERT_TRUE(typeid(signed char) == typeid(char));
+   TEST("signed char -> long") {
+     Value a((signed char) 2);
 
-
-  //   Value a((signed char) 2);
-
-  //   ASSERT_TRUE(value_castable<long>(a));
-  //   ASSERT_EQ(2, value_cast<long>(a));
-  // }
+     ASSERT_TRUE(value_castable<long>(a));
+     ASSERT_EQ(2, value_cast<long>(a));
+   }
 
   TEST("unsigned char -> long") {
     Value a((unsigned char) 2);
@@ -225,7 +299,7 @@ FIXTURE(ValueTest) {
     Value a((unsigned short) std::numeric_limits<short>::max());
 
     ASSERT_TRUE(value_castable<short>(a));
-    ASSERT_EQ(32767, value_cast<short>(a));
+    ASSERT_EQ(std::numeric_limits<short>::max(), value_cast<short>(a));
   }
 
   TEST("ushort(max_short + 1) -> short: overflow") {
@@ -285,6 +359,69 @@ FIXTURE(ValueTest) {
     ASSERT_EQ(Enum10, value_cast<Enum>(l));
   }
 
+  TEST("enum -> long") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<long>(l));
+    ASSERT_EQ(10, value_cast<long>(l));
+  }
+
+  TEST("enum -> int") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<int>(l));
+    ASSERT_EQ(10, value_cast<int>(l));
+  }
+
+  TEST("enum -> short") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<short>(l));
+    ASSERT_EQ(10, value_cast<short>(l));
+  }
+
+  TEST("enum -> char") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<char>(l));
+    ASSERT_EQ(10, value_cast<char>(l));
+  }
+
+  TEST("enum -> signed char") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<signed char>(l));
+    ASSERT_EQ(10, value_cast<signed char>(l));
+  }
+
+  TEST("enum -> ulong") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<unsigned long>(l));
+    ASSERT_EQ(10, value_cast<unsigned long>(l));
+  }
+
+  TEST("enum -> uint") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<unsigned int>(l));
+    ASSERT_EQ(10, value_cast<unsigned int>(l));
+  }
+
+  TEST("enum -> ushort") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<unsigned short>(l));
+    ASSERT_EQ(10, value_cast<unsigned short>(l));
+  }
+
+  TEST("enum -> uchar") {
+    Value l(Enum10);
+
+    ASSERT_TRUE(value_castable<unsigned char>(l));
+    ASSERT_EQ(10, value_cast<unsigned char>(l));
+  }
+
   TEST("int -> enum") {
     Value i((int) 10);
 
@@ -299,6 +436,12 @@ FIXTURE(ValueTest) {
 
   TEST("char -> enum") {
     Value c((char) 10);
+
+    ASSERT_EQ(Enum10, value_cast<Enum>(c));
+  }
+
+  TEST("signed char -> enum") {
+    Value c((signed char) 10);
 
     ASSERT_EQ(Enum10, value_cast<Enum>(c));
   }

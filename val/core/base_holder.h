@@ -7,7 +7,7 @@ template <typename T>
 struct BaseHolder : Holder {
   virtual const T& getValue() const = 0;
 
-private:
+protected:
   const std::type_info& type() const override {
     return typeid(T);
   }

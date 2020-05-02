@@ -30,7 +30,8 @@ struct ValueCast<T, true> {
     (p = (T*) safe_value_cast<long>(v))  ||
     (p = (T*) safe_value_cast<int>(v))   ||
     (p = (T*) safe_value_cast<short>(v)) ||
-    (p = (T*) safe_value_cast<char>(v));
+    (p = (T*) safe_value_cast<char>(v))  ||
+    (p = (T*) safe_value_cast<signed char>(v));
     return p;
   }
 };
@@ -44,6 +45,10 @@ T* value_cast(Value* v) {
 /////////////////////////////////////////////////////////////////
 template<>
 char* value_cast<char>(Value* op);
+
+/////////////////////////////////////////////////////////////////
+template<>
+signed char* value_cast<signed char>(Value* op);
 
 /////////////////////////////////////////////////////////////////
 template<>

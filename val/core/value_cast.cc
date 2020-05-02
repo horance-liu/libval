@@ -41,10 +41,18 @@ char* type_value_cast<char>(Value* op) {
   return signed_type_value_cast<char, void>(op);
 }
 
+template <>
+signed char* type_value_cast<signed char>(Value* op) {
+  return signed_type_value_cast<signed char, void>(op);
+}
+
 ///////////////////////////////////////////////////////
 template <>
 short* type_value_cast<short>(Value* op) {
-  return signed_type_value_cast<short, char>(op);
+  short* p = nullptr;
+  (p = signed_type_value_cast<short, char>(op)) ||
+  (p = signed_type_value_cast<short, signed char>(op));
+  return p;
 }
 
 ///////////////////////////////////////////////////////
@@ -62,7 +70,10 @@ long* type_value_cast<long>(Value* op) {
 ///////////////////////////////////////////////////////
 template <>
 unsigned char* type_value_cast<unsigned char>(Value* op) {
-  return unsigned_type_value_cast<unsigned char, char, void>(op);
+  unsigned char* p = nullptr;
+  (p = unsigned_type_value_cast<unsigned char, char, void>(op)) ||
+  (p = unsigned_type_value_cast<unsigned char, signed char, void>(op));
+  return p;
 }
 
 ///////////////////////////////////////////////////////
@@ -110,6 +121,12 @@ T* scoped_value_cast(Value* op) {
 template <>
 char* value_cast<char>(Value* op) {
   return scoped_value_cast<char>(op);
+}
+
+///////////////////////////////////////////////////////
+template <>
+signed char* value_cast<signed char>(Value* op) {
+  return scoped_value_cast<signed char>(op);
 }
 
 ///////////////////////////////////////////////////////

@@ -3,7 +3,7 @@
 
 #include "val/core/base_holder.h"
 
-template<typename T>
+template<typename T, bool IsEnum = false>
 struct ValueHolder : BaseHolder<T> {
   ValueHolder(const T& value) : held(value) {
   }
@@ -33,6 +33,7 @@ protected:
     int   si;
     short ss;
     char  ch;
+    signed char sc;
   } held;
 };
 
@@ -81,6 +82,18 @@ private:
   }
   const char& getValue() const override {
     return held.ch;
+  }
+};
+
+template<>
+struct ValueHolder<signed char> : SignedHolder<signed char> {
+  using SignedHolder<signed char>::SignedHolder;
+private:
+  BaseHolder* clone() const override {
+    return new ValueHolder(held.sc);
+  }
+  const signed char& getValue() const override {
+    return held.sc;
   }
 };
 
@@ -138,12 +151,27 @@ private:
 template<>
 struct ValueHolder<unsigned char> : UnsignedHolder<unsigned char> {
   using UnsignedHolder<unsigned char>::UnsignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.uc);
   }
   const unsigned char& getValue() const override {
     return held.uc;
+  }
+};
+
+template<typename T>
+struct ValueHolder<T, true> : UnsignedHolder<unsigned long> {
+  using UnsignedHolder<unsigned long>::UnsignedHolder;
+
+private:
+  BaseHolder* clone() const override {
+    return new ValueHolder(held.ul);
+  }
+
+  const unsigned long& getValue() const override {
+    return held.ul;
   }
 };
 
