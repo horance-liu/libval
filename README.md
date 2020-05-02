@@ -92,8 +92,6 @@ TEST("enum -> long") {
 ### universal constructor.
 
 ```cpp
-Value(Value&&) noexcept;
-
 template <class T>
 Value(T&&);
 
@@ -104,8 +102,6 @@ explicit Value(std::in_place_type_t<T>, Args&&... args);
 ### universal operator= 
 
 ```cpp
-Value& operator=(Value&&) noexcept;
-
 template<typename T>
 Value& operator=(T&&);
 ```

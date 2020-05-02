@@ -3,13 +3,17 @@
 
 #include "val/core/value_holder.h"
 #include <type_traits>
+#include <typeinfo>
 
 struct Value {
-  Value() = default;
+  Value(Holder* holder = nullptr);
   ~Value();
 
   Value(const Value&);
   Value& operator=(const Value&);
+
+  Value(Value&&) noexcept;
+  Value& operator=(Value&& rhs) noexcept;
 
   Value& swap(Value&);
 
@@ -38,7 +42,7 @@ struct Value {
   }
 
 private:
-  Holder* holder = nullptr;
+  Holder* holder;
 };
 
 #endif /* HE1D05BB9_6E41_48E3_92EE_63CA1173D650 */

@@ -40,10 +40,12 @@ protected:
 template<>
 struct ValueHolder<long> : SignedHolder<long> {
   using SignedHolder<long>::SignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.sl);
   }
+
   const long& getValue() const override {
     return held.sl;
   }
@@ -52,10 +54,12 @@ private:
 template<>
 struct ValueHolder<int> : SignedHolder<int> {
   using SignedHolder<int>::SignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.si);
   }
+
   const int& getValue() const override {
     return held.si;
   }
@@ -64,10 +68,12 @@ private:
 template<>
 struct ValueHolder<short> : SignedHolder<short> {
   using SignedHolder<short>::SignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.ss);
   }
+
   const short& getValue() const override {
     return held.ss;
   }
@@ -76,10 +82,12 @@ private:
 template<>
 struct ValueHolder<char> : SignedHolder<char> {
   using SignedHolder<char>::SignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.ch);
   }
+
   const char& getValue() const override {
     return held.ch;
   }
@@ -88,10 +96,12 @@ private:
 template<>
 struct ValueHolder<signed char> : SignedHolder<signed char> {
   using SignedHolder<signed char>::SignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.sc);
   }
+
   const signed char& getValue() const override {
     return held.sc;
   }
@@ -115,10 +125,12 @@ protected:
 template<>
 struct ValueHolder<unsigned long> : UnsignedHolder<unsigned long> {
   using UnsignedHolder<unsigned long>::UnsignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.ul);
   }
+
   const unsigned long& getValue() const override {
     return held.ul;
   }
@@ -127,10 +139,12 @@ private:
 template<>
 struct ValueHolder<unsigned int> : UnsignedHolder<unsigned int> {
   using UnsignedHolder<unsigned int>::UnsignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.ui);
   }
+
   const unsigned int& getValue() const override {
     return held.ui;
   }
@@ -139,10 +153,12 @@ private:
 template<>
 struct ValueHolder<unsigned short> : UnsignedHolder<unsigned short> {
   using UnsignedHolder<unsigned short>::UnsignedHolder;
+
 private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.us);
   }
+
   const unsigned short& getValue() const override {
     return held.us;
   }
@@ -156,6 +172,7 @@ private:
   BaseHolder* clone() const override {
     return new ValueHolder(held.uc);
   }
+
   const unsigned char& getValue() const override {
     return held.uc;
   }

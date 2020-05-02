@@ -1,7 +1,22 @@
 #include "val/core/value.h"
+#include <utility>
+
+Value::Value(Holder* holder) : holder(holder) {
+}
 
 Value::~Value() {
-  delete holder;
+  if (holder) {
+    delete holder;
+  }
+}
+
+Value::Value(Value&& rhs) noexcept : holder(rhs.holder) {
+  rhs.holder = nullptr;
+}
+
+Value& Value::operator=(Value&& rhs) noexcept {
+  Value(std::move(rhs)).swap(*this);
+  return *this;
 }
 
 bool Value::empty() const {
