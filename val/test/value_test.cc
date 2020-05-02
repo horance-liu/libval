@@ -155,6 +155,52 @@ FIXTURE(ValueTest) {
     ASSERT_EQ(2, value_cast<unsigned long>(a));
   }
 
+  // TEST("signed char -> ulong") {
+  //   Value a((signed char) 2);
+
+  //   ASSERT_TRUE(value_castable<unsigned long>(a));
+  //   ASSERT_EQ(2, value_cast<unsigned long>(a));
+  // }
+
+  TEST("unsigned char -> ulong") {
+    Value a((unsigned char) 2);
+
+    ASSERT_TRUE(value_castable<unsigned long>(a));
+    ASSERT_EQ(2, value_cast<unsigned long>(a));
+  }
+
+  TEST("char -> long") {
+    Value a((char) 2);
+
+    ASSERT_TRUE(value_castable<long>(a));
+    ASSERT_EQ(2, value_cast<long>(a));
+  }
+
+  // TEST("signed char -> long") {
+  //   ASSERT_TRUE(typeid(unsigned char) == typeid(char));
+  //   ASSERT_TRUE(typeid(signed char) == typeid(char));
+
+
+  //   Value a((signed char) 2);
+
+  //   ASSERT_TRUE(value_castable<long>(a));
+  //   ASSERT_EQ(2, value_cast<long>(a));
+  // }
+
+  TEST("unsigned char -> long") {
+    Value a((unsigned char) 2);
+
+    ASSERT_TRUE(value_castable<long>(a));
+    ASSERT_EQ(2, value_cast<long>(a));
+  }
+
+  TEST("uchar -> char") {
+    Value a((unsigned char) 2);
+
+    ASSERT_TRUE(value_castable<char>(a));
+    ASSERT_EQ(2, value_cast<char>(a));
+  }
+
   TEST("int -> ulong") {
     Value a((int) 5);
 
