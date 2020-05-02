@@ -7,7 +7,8 @@ package(
 licenses(["notice"])  # Apache 2.0
 
 cc_library(
-    name = "val",
-    hdrs = ["val.h"],
-    deps = ["//val/core"],
+    name = "core",
+    hdrs = glob(["*.h"]),
+    srcs = glob(["*.cc"]),
+    copts = ["-std=c++14"],
 )
